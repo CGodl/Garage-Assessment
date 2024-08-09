@@ -34,7 +34,7 @@ export default function InvoiceGeneratorApp() {
 	});
 
   const onSubmission = async (values: ValueProps) => {
-    console.log(values)
+    
     
     try {
       const response = await axios.post('', {
