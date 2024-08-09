@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { uuidValidator } from '@/lib/utils';
 
 type ValueProps = {
   submission_id: string
@@ -22,7 +23,7 @@ export default function InvoiceGeneratorApp() {
 	const formSchema = z.object({
 		submission_id: z
 			.string()
-			.min(1, { message: 'Input needs at least 1 value' }),
+			.min(16, { message: 'Input needs at least 16 characters' }).refine((data) => uuidValidator(data), { message: "Input must contains a uuid value ex. 5259aa44-e523-423f-9542-613987f7b013"}),
 	});
 
 	const form = useForm<z.infer<typeof formSchema>>({
