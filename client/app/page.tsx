@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { uuidValidator } from '@/lib/utils';
+import { uuidValidator, uuidExtract } from '@/lib/utils';
 
 type ValueProps = {
   submission_id: string
@@ -38,7 +38,7 @@ export default function InvoiceGeneratorApp() {
     
     try {
       const response = await axios.post('', {
-        id: values.submission_id
+        id: uuidExtract(values.submission_id)
       })
 
     } catch (error) {

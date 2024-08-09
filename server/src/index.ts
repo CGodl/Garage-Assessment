@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 const port = 6006;
 
-app.post("/", async (req, res) => {
+app.post("/api/invoice", async (req, res) => {
     // Calling the template render func with dynamic data
     const result = await createTemplate(req.body);
   
