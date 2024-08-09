@@ -3,7 +3,7 @@ import createTemplate from "./create-template";
 
 const app = express();
 app.use(express.json());
-const port = 3000;
+const port = 6000;
 
 app.post("/", async (req, res) => {
     // Calling the template render func with dynamic data
