@@ -61,7 +61,6 @@ export default function InvoiceGeneratorApp() {
 			document.body.appendChild(link);
 			link.click();
 
-			// Clean up the URL object and remove the link element
 			URL.revokeObjectURL(pdfUrl);
 			link.remove();
 		} catch (error) {
@@ -87,7 +86,7 @@ export default function InvoiceGeneratorApp() {
 										<FormLabel>Sales ID</FormLabel>
 										<FormControl>
 											<Input
-												className="flex space-x-4 p-3 rounded-lg focus:outline-none"
+												className="flex space-x-4 text-black p-3 rounded-lg focus:outline-none"
 												placeholder='Add a url or UUID to receive related pdf'
 												{...field}
 											/>

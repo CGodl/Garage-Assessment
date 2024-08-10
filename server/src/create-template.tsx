@@ -109,6 +109,14 @@ const formatArr = (arr) => {
 	}
 };
 
+const formatDescrip = (description) => {
+	if (description.length > 350) {
+		return (description.substring(0, 350) + "... contact seller for more information.");
+	}
+
+	return description
+}
+
 const PDF = ({ data }: PDFProps) => {
 	return (
 		<Document>
@@ -147,7 +155,7 @@ const PDF = ({ data }: PDFProps) => {
 					<View style={styles.tableRow}>
 						<Text style={styles.tableCol}>{formatArr(data.categories)}</Text>
 						<Text style={styles.tableCol}>{data.listingTitle}</Text>
-						<Text style={styles.tableCol}>{data.listingDescription}</Text>
+						<Text style={styles.tableCol}>{formatDescrip(data.listingDescription)}</Text>
 						<Text style={styles.tableCol}>${data.sellingPrice}</Text>
 						<Text style={styles.tableCol}>
 							{data.isShippable ? 'Can be shipped' : 'Cannot be shipped'}
