@@ -34,12 +34,13 @@ interface PDFProps {
 const styles = StyleSheet.create({
 	page: {
 		fontFamily: 'Helvetica',
-		fontSize: 12,
+		fontSize: 10,
 		padding: 30,
 	},
 	header: {
 		textAlign: 'center',
-		marginBottom: 20,
+		marginBottom: 15,
+		fontSize: 24,
 	},
 	invoiceDetails: {
 		display: 'flex',
@@ -109,6 +110,14 @@ const formatArr = (arr) => {
 	}
 };
 
+const formatDescrip = (description) => {
+	if (description.length > 350) {
+		return (description.substring(0, 350) + "... contact seller for more information.");
+	}
+
+	return description
+}
+
 const PDF = ({ data }: PDFProps) => {
 	return (
 		<Document>
@@ -122,10 +131,10 @@ const PDF = ({ data }: PDFProps) => {
 						<Text>Garage</Text>
 						<Text>Phone: (201) 293-7164</Text>
 						<Text>Email: support@withgarage.com</Text>
-						<Text>Website: withgarage.com/</Text>
+						<Text>Website: withgarage.com</Text>
 					</View>
 					<View style={styles.clientDetails}>
-						<Text>INVOICE DATE: {data.createdAt}</Text>
+						<Text>INVOICE DATE: {data.createdAt.split("T")[0]}</Text>
 						<Text>Item Location</Text>
 						<Text>
 							{data.addressPrimary} {data.addressSecondary}
@@ -147,7 +156,7 @@ const PDF = ({ data }: PDFProps) => {
 					<View style={styles.tableRow}>
 						<Text style={styles.tableCol}>{formatArr(data.categories)}</Text>
 						<Text style={styles.tableCol}>{data.listingTitle}</Text>
-						<Text style={styles.tableCol}>{data.listingDescription}</Text>
+						<Text style={styles.tableCol}>{formatDescrip(data.listingDescription)}</Text>
 						<Text style={styles.tableCol}>${data.sellingPrice}</Text>
 						<Text style={styles.tableCol}>
 							{data.isShippable ? 'Can be shipped' : 'Cannot be shipped'}
