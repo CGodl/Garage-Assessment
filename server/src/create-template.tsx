@@ -34,12 +34,13 @@ interface PDFProps {
 const styles = StyleSheet.create({
 	page: {
 		fontFamily: 'Helvetica',
-		fontSize: 12,
+		fontSize: 10,
 		padding: 30,
 	},
 	header: {
 		textAlign: 'center',
-		marginBottom: 20,
+		marginBottom: 15,
+		fontSize: 24,
 	},
 	invoiceDetails: {
 		display: 'flex',
@@ -130,10 +131,10 @@ const PDF = ({ data }: PDFProps) => {
 						<Text>Garage</Text>
 						<Text>Phone: (201) 293-7164</Text>
 						<Text>Email: support@withgarage.com</Text>
-						<Text>Website: withgarage.com/</Text>
+						<Text>Website: withgarage.com</Text>
 					</View>
 					<View style={styles.clientDetails}>
-						<Text>INVOICE DATE: {data.createdAt}</Text>
+						<Text>INVOICE DATE: {data.createdAt.split("T")[0]}</Text>
 						<Text>Item Location</Text>
 						<Text>
 							{data.addressPrimary} {data.addressSecondary}
