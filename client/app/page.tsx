@@ -48,18 +48,13 @@ export default function InvoiceGeneratorApp() {
 
 	  const link = document.createElement('a');
 	  link.href = pdfUrl;
-	  link.setAttribute('download', 'invoice.pdf');
+	  link.setAttribute('download', `${uuidExtract(values.submission_id)} Invoice.pdf`);
 	  document.body.appendChild(link);
 	  link.click();
 	  
 	  // Clean up the URL object and remove the link element
 	  URL.revokeObjectURL(pdfUrl);
 	  link.remove();
-
-	//   const response = await axios.post('https://garage-backend.onrender.com/getListing', {
-    //     id: uuidExtract(values.submission_id)
-    //   })
-
 
     } catch (error) {
       //TODO: Add Error Message
