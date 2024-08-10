@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { uuidValidator } from '@/lib/utils';
+import { uuidValidator, uuidExtract } from '@/lib/utils';
 
 type ValueProps = {
   submission_id: string
@@ -37,9 +37,24 @@ export default function InvoiceGeneratorApp() {
     
     
     try {
-      const response = await axios.post('', {
-        id: values.submission_id
-      })
+      const response = await axios.post('http://localhost:6006/api/invoice', {
+        id: uuidExtract(values.submission_id)
+      }, {
+		responseType: 'blob' // Important to set this to handle binary data
+	  })
+
+	  const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+	  const pdfUrl = URL.createObjectURL(pdfBlob);
+
+	  const link = document.createElement('a');
+	  link.href = pdfUrl;
+	  link.setAttribute('download', `${uuidExtract(values.submission_id)} Invoice.pdf`);
+	  document.body.appendChild(link);
+	  link.click();
+	  
+	  // Clean up the URL object and remove the link element
+	  URL.revokeObjectURL(pdfUrl);
+	  link.remove();
 
     } catch (error) {
       //TODO: Add Error Message
